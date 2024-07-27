@@ -1,1 +1,0 @@
-# ORBSLAM2_detailed
