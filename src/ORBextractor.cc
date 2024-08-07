@@ -558,7 +558,7 @@ ORBextractor::ORBextractor(int _nfeatures,		//指定要提取的特征点数目
     for (v = 0; v <= vmax; ++v)
         umax[v] = cvRound(sqrt(hp2 - v * v));		//结果都是大于0的结果，表示x坐标在这一行的边界
 
-    // Make sure we are symmetric
+    // Make sure we are symmetric确保我们是对称的
 	//这里其实是使用了对称的方式计算上四分之一的圆周上的umax，目的也是为了保持严格的对称（如果按照常规的想法做，由于cvRound就会很容易出现不对称的情况，
 	//同时这些随机采样的特征点集也不能够满足旋转之后的采样不变性了）
 	for (v = HALF_PATCH_SIZE, v0 = 0; v >= vmin; --v)
@@ -1533,7 +1533,7 @@ static void computeDescriptors(const Mat& image, vector<KeyPoint>& keypoints, Ma
  * @param[in & out] _descriptors              存储特征点描述子的矩阵
  */
 void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPoint>& _keypoints,
-                      OutputArray _descriptors)
+                      OutputArray _descriptors) //重载（）运算符
 { 
 	// Step 1 检查图像有效性。如果图像为空，那么就直接返回
     if(_image.empty())
@@ -1549,7 +1549,8 @@ void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPo
     //得到一个图像向量，包含金字塔中的每一层图像
     ComputePyramid(image);
 
-    // Step 3 计算图像的特征点，提取fast特征点并且将特征点进行均匀化，然后计算方向。均匀的特征点可以提高位姿计算精度
+    // Step 3 计算图像的特征点，提取fast特征点并且将特征点进行均匀化，然后计算方向。
+    //均匀的特征点可以提高位姿计算精度
 	// 存储所有的特征点，注意此处为二维的vector，第一维存储的是金字塔的层数，第二维存储的是那一层金字塔图像里提取的所有特征点
     vector < vector<KeyPoint> > allKeypoints; 
     //使用四叉树的方式计算每层图像的特征点并进行分配（将每帧1000个特征点平均分配到图像金字塔的每一层），并对每一层进行提取fast角点

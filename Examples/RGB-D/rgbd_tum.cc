@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     //对图像序列中的每张图像展开遍历
     for(int ni=0; ni<nImages; ni++)
     {
-        //! 读取图像
+        //step 4.1 读取图像
         // Read image and depthmap from file
         imRGB = cv::imread(string(argv[3])+"/"+vstrImageFilenamesRGB[ni],CV_LOAD_IMAGE_UNCHANGED);
         imD = cv::imread(string(argv[3])+"/"+vstrImageFilenamesD[ni],CV_LOAD_IMAGE_UNCHANGED);

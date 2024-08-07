@@ -89,9 +89,11 @@ System::System(const string &strVocFile,					//词典文件路径
     cout << "Vocabulary loaded!" << endl << endl;
 
     //Create KeyFrame Database
+    // 创建关键帧数据库，主要保存ORB描述子倒排索引（即根据描述子查找拥有该描述子的关键帧）
     mpKeyFrameDatabase = new KeyFrameDatabase(*mpVocabulary);
 
     //Create the Map
+    // 创建地图
     mpMap = new Map();
 
     //Create Drawers. These are used by the Viewer
